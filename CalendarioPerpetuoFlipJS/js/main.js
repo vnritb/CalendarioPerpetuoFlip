@@ -10,6 +10,15 @@
 
     var grupoDiaSemana, grupoDiaMes, grupoMes, reloj;
     var mountReloj, mountDiaSemana, mountDiaMes, mountMes, canvasMadera;
+    var elVentanaReloj, elVentanaDiaMes, elVentanaDiaSemana, elVentanaMes;
+
+    // Mismas proporciones que ContentView.swift (proporcionIzquierda/
+    // proporcionDerecha/espaciado/margenExterior), pero calculadas aqui a
+    // mano en JS en vez de con flexbox: ver estilos.css para el porque.
+    var MARGEN_EXTERIOR = 20;
+    var ESPACIADO_LAYOUT = 16;
+    var PROPORCION_IZQUIERDA = 2;
+    var PROPORCION_DERECHA = 3;
 
     function alListo(fn) {
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
@@ -49,6 +58,11 @@
     }, false);
 
     function construirDOM() {
+        elVentanaReloj = document.getElementById('ventana-reloj');
+        elVentanaDiaMes = document.getElementById('ventana-dia-mes');
+        elVentanaDiaSemana = document.getElementById('ventana-dia-semana');
+        elVentanaMes = document.getElementById('ventana-mes');
+
         mountReloj = document.getElementById('mount-reloj');
         mountDiaSemana = document.getElementById('mount-dia-semana');
         mountDiaMes = document.getElementById('mount-dia-mes');
@@ -66,6 +80,39 @@
         mountReloj.appendChild(reloj.el);
     }
 
+    // Coloca las 4 ventanas con position:absolute + left/top/width/height
+    // en pixeles, calculados a mano (sin flexbox, ver estilos.css).
+    // Layout: columna izquierda (reloj arriba, dia del mes abajo) mas
+    // estrecha; columna derecha (dia de semana arriba, mes abajo) mas
+    // ancha, proporcion 2:3 -- igual que ContentView.swift.
+    function ajustarLayoutPrincipal() {
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+
+        var anchoDisponible = w - MARGEN_EXTERIOR * 2 - ESPACIADO_LAYOUT;
+        var sumaProporciones = PROPORCION_IZQUIERDA + PROPORCION_DERECHA;
+        var anchoIzquierda = anchoDisponible * PROPORCION_IZQUIERDA / sumaProporciones;
+        var anchoDerecha = anchoDisponible * PROPORCION_DERECHA / sumaProporciones;
+        var alturaFila = (h - MARGEN_EXTERIOR * 2 - ESPACIADO_LAYOUT) / 2;
+
+        var leftIzquierda = MARGEN_EXTERIOR;
+        var leftDerecha = MARGEN_EXTERIOR + anchoIzquierda + ESPACIADO_LAYOUT;
+        var topArriba = MARGEN_EXTERIOR;
+        var topAbajo = MARGEN_EXTERIOR + alturaFila + ESPACIADO_LAYOUT;
+
+        posicionarVentana(elVentanaReloj, leftIzquierda, topArriba, anchoIzquierda, alturaFila);
+        posicionarVentana(elVentanaDiaMes, leftIzquierda, topAbajo, anchoIzquierda, alturaFila);
+        posicionarVentana(elVentanaDiaSemana, leftDerecha, topArriba, anchoDerecha, alturaFila);
+        posicionarVentana(elVentanaMes, leftDerecha, topAbajo, anchoDerecha, alturaFila);
+    }
+
+    function posicionarVentana(el, left, top, ancho, alto) {
+        el.style.left = left + 'px';
+        el.style.top = top + 'px';
+        el.style.width = ancho + 'px';
+        el.style.height = alto + 'px';
+    }
+
     function medirYAjustar() {
         // Reajustar el <canvas> de madera a la resolucion real de pantalla.
         var ancho = window.innerWidth;
@@ -76,17 +123,52 @@
         }
         Madera.dibujar(canvasMadera);
 
+        // 1) Posicionar las 4 ventanas (sin flexbox, ver arriba).
+        ajustarLayoutPrincipal();
+
+        // 2) Con las ventanas ya colocadas, medir su hueco interior real
+        //    y ajustar lo que va dentro (laminas / reloj).
         ajustarGrupo(grupoDiaSemana, mountDiaSemana);
         ajustarGrupo(grupoDiaMes, mountDiaMes);
         ajustarGrupo(grupoMes, mountMes);
 
         var rectReloj = mountReloj.getBoundingClientRect();
         reloj.setSize(rectReloj.width, rectReloj.height);
+
+        actualizarDiagnostico();
     }
 
     function ajustarGrupo(grupo, contenedor) {
         var rect = contenedor.getBoundingClientRect();
         grupo.setSize(rect.width, rect.height);
+    }
+
+    // Linea de diagnostico en la esquina: tamanos realmente medidos, para
+    // poder hacer una captura y saber si el layout se esta calculando bien
+    // en el dispositivo real, sin depurar por cable. Quitar cuando ya no
+    // haga falta.
+    function actualizarDiagnostico() {
+        var el = document.getElementById('debug-info');
+        if (!el) {
+            el = document.createElement('div');
+            el.id = 'debug-info';
+            el.style.position = 'fixed';
+            el.style.left = '4px';
+            el.style.top = '2px';
+            el.style.zIndex = '9998';
+            el.style.color = 'rgba(255,255,255,0.55)';
+            el.style.fontFamily = 'Courier, monospace';
+            el.style.fontSize = '9px';
+            document.body.appendChild(el);
+        }
+        var rDS = mountDiaSemana.getBoundingClientRect();
+        var rDM = mountDiaMes.getBoundingClientRect();
+        var rR = mountReloj.getBoundingClientRect();
+        el.textContent =
+            'vp ' + window.innerWidth + 'x' + window.innerHeight +
+            ' | diaSemana ' + Math.round(rDS.width) + 'x' + Math.round(rDS.height) +
+            ' | diaMes ' + Math.round(rDM.width) + 'x' + Math.round(rDM.height) +
+            ' | reloj ' + Math.round(rR.width) + 'x' + Math.round(rR.height);
     }
 
     var coloresPorFase = {
