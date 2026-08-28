@@ -42,7 +42,17 @@ var FlipGroup = (function () {
                 if (n === 0) { return; }
                 var anchoCelda = (anchoTotal - ESPACIADO * (n - 1)) / n;
                 if (anchoCelda < 1) { anchoCelda = 1; }
+
+                // Sin flexbox: se centra la fila a mano y cada celda se
+                // coloca con left/top en pixeles (position:absolute en
+                // CSS). Mas verboso que "justify-content:center", pero
+                // no depende de que el motor resuelva bien el flexbox.
+                var totalUsado = anchoCelda * n + ESPACIADO * (n - 1);
+                var offsetInicial = (anchoTotal - totalUsado) / 2;
+
                 for (var i = 0; i < n; i++) {
+                    var left = offsetInicial + i * (anchoCelda + ESPACIADO);
+                    celdas[i].el.style.left = left + 'px';
                     celdas[i].setSize(anchoCelda, altoTotal);
                 }
             }

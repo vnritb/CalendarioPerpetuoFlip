@@ -17,8 +17,15 @@ var FlipCharacter = (function () {
     function crearMitad(esSuperior) {
         var el = document.createElement('div');
         el.className = 'flip-panel';
-        el.style.webkitBackfaceVisibility = 'hidden';
-        el.style.backfaceVisibility = 'hidden';
+        // OJO: "backface-visibility:hidden" NO se pone aqui. Solo hace
+        // falta en las solapas que realmente giran (ver mas abajo); en
+        // Safari de iOS 9/10, un panel SIN transform que ademas tiene
+        // border-radius + overflow:hidden y ademas backface-visibility:
+        // hidden, dentro de un contenedor con "perspective", puede
+        // quedar completamente invisible (bug conocido de WebKit viejo
+        // con el compositing de elementos 3D). Como las mitades
+        // estaticas nunca rotan, no necesitan backface-visibility y así
+        // evitamos ese bug.
         if (esSuperior) {
             el.style.top = '0';
         } else {
@@ -81,6 +88,12 @@ var FlipCharacter = (function () {
         solapaInferior.el.style.webkitTransformOrigin = '50% 0%';
         solapaInferior.el.style.transformOrigin = '50% 0%';
         solapaInferior.el.style.boxShadow = '0 -1px 3px rgba(0,0,0,0.5)';
+        // Estas dos SI giran (rotateX), asi que necesitan backface-visibility
+        // para no mostrar el caracter "en espejo" a mitad de giro.
+        solapaSuperior.el.style.webkitBackfaceVisibility = 'hidden';
+        solapaSuperior.el.style.backfaceVisibility = 'hidden';
+        solapaInferior.el.style.webkitBackfaceVisibility = 'hidden';
+        solapaInferior.el.style.backfaceVisibility = 'hidden';
 
         var bisagra = document.createElement('div');
         bisagra.className = 'flip-bisagra';

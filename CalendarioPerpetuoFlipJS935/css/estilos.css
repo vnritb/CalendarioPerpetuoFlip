@@ -53,47 +53,26 @@ html, body {
     display: block;
 }
 
+/* Layout de las 4 "ventanas" (reloj / dia semana / dia mes / mes):
+   NO se usa flexbox aqui. Safari de iOS 9/10 tiene bugs conocidos con
+   "flex" combinado con alturas en porcentaje anidadas varios niveles
+   (Chromium/Blink no los reproduce, por eso las pruebas en escritorio
+   salian bien). En su lugar, js/main.js calcula la posicion y el
+   tamano de cada ventana en pixeles (igual que el GeometryReader de
+   la version Swift) y los aplica con position:absolute + left/top/
+   width/height directos: cero porcentajes, cero flexbox, maxima
+   compatibilidad. */
+
 #contenido {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 20px;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-}
-
-.columna {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    height: 100%;
-}
-
-.columna-izquierda {
-    -webkit-flex: 2;
-    flex: 2;
-    margin-right: 16px;
-}
-
-.columna-derecha {
-    -webkit-flex: 3;
-    flex: 3;
 }
 
 .ventana {
-    -webkit-flex: 1;
-    flex: 1;
-    position: relative;
-}
-
-.ventana-reloj,
-.ventana-dia-semana {
-    margin-bottom: 16px;
+    position: absolute;
 }
 
 .ventana-marco {
@@ -138,23 +117,17 @@ html, body {
     position: relative;
     width: 100%;
     height: 100%;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-align-items: center;
-    align-items: center;
 }
 
+/* Tambien sin flexbox: js/flipGroup.js posiciona cada .flip-celda con
+   left/top/width/height en pixeles, centrando la fila a mano. */
 .flip-celda {
-    position: relative;
-    height: 100%;
+    position: absolute;
+    top: 0;
     -webkit-perspective: 600px;
     perspective: 600px;
-    margin-left: 3px;
-    margin-right: 3px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
 
 .flip-panel {
