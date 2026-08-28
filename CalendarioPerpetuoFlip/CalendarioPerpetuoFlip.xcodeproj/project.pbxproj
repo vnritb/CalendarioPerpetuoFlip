@@ -1,0 +1,407 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		083927229ED54666B589C96E /* CalendarioPerpetuoFlipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7409321AAF8497284D9F834 /* CalendarioPerpetuoFlipApp.swift */; };
+		E5BC53BE11234F5084B1B6E5 /* CalendarioDatos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26289B8B46AA4A3585B2E08A /* CalendarioDatos.swift */; };
+		45908A8EE2204B23B490CD4B /* EstadoFlip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BCC79990E34978906717DC /* EstadoFlip.swift */; };
+		74FB9045C25E49BC8DDD48EB /* CalendarioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFB0677C79E4D2B9F534831 /* CalendarioViewModel.swift */; };
+		F9D9C40AD90D4B9FAD28BAED /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CFC9FE14F94C82A903EECA /* ContentView.swift */; };
+		3F7C0223CADE4938A4E07A18 /* FlipCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5E8901FF047B5B8BEC66C /* FlipCharacterView.swift */; };
+		3747E75C4CCB43D5A86FE656 /* FlipGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3963D18B4243F1A654032C /* FlipGroupView.swift */; };
+		06BF5490AABC42C7967B8D8C /* AnalogClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E9F4048DBD4D14839F5D6A /* AnalogClockView.swift */; };
+		CCFDEC0753034C3089ED8507 /* WoodenFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B5141A05BC4D78B4AB0884 /* WoodenFrame.swift */; };
+		ABA9E918CCFD437E9B57E301 /* FlipSoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8C3640FE44851BFD63200 /* FlipSoundPlayer.swift */; };
+		E0FD4679107346EF8710DF7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 627F7500388C4274B3F87147 /* Assets.xcassets */; };
+		BB4137E6FA4E4B218BD6D6DA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A830917632BF4CF189E125E5 /* AVFoundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A9D841713C294124A7B01C9D /* CalendarioPerpetuoFlip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarioPerpetuoFlip.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7409321AAF8497284D9F834 /* CalendarioPerpetuoFlipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarioPerpetuoFlipApp.swift; sourceTree = "<group>"; };
+		26289B8B46AA4A3585B2E08A /* CalendarioDatos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarioDatos.swift; sourceTree = "<group>"; };
+		03BCC79990E34978906717DC /* EstadoFlip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstadoFlip.swift; sourceTree = "<group>"; };
+		5DFB0677C79E4D2B9F534831 /* CalendarioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarioViewModel.swift; sourceTree = "<group>"; };
+		82CFC9FE14F94C82A903EECA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		97C5E8901FF047B5B8BEC66C /* FlipCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipCharacterView.swift; sourceTree = "<group>"; };
+		5F3963D18B4243F1A654032C /* FlipGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipGroupView.swift; sourceTree = "<group>"; };
+		28E9F4048DBD4D14839F5D6A /* AnalogClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogClockView.swift; sourceTree = "<group>"; };
+		77B5141A05BC4D78B4AB0884 /* WoodenFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoodenFrame.swift; sourceTree = "<group>"; };
+		6FD8C3640FE44851BFD63200 /* FlipSoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipSoundPlayer.swift; sourceTree = "<group>"; };
+		B4DB3474270142DAB7E08DF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		627F7500388C4274B3F87147 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A830917632BF4CF189E125E5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		819CA3B759EE48CE85687F0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB4137E6FA4E4B218BD6D6DA /* AVFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		84DE979174C046D8A1DD83D5 = {
+			isa = PBXGroup;
+			children = (
+				3D04A857095A4BE18ABAA9D9 /* CalendarioPerpetuoFlip */,
+				F719D0C59F2C4475A14E75F9 /* Products */,
+				BEF6CBAFCFAE4DF9BF4084E5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3D04A857095A4BE18ABAA9D9 /* CalendarioPerpetuoFlip */ = {
+			isa = PBXGroup;
+			children = (
+				C7409321AAF8497284D9F834 /* CalendarioPerpetuoFlipApp.swift */,
+				48C49F3FA53A446796B570DF /* Models */,
+				44EDF668D3BA49D59F63D653 /* ViewModels */,
+				2AF402F6D7BB4E3FB905A8CC /* Views */,
+				2B54A538D5594A71811894DE /* Audio */,
+				627F7500388C4274B3F87147 /* Assets.xcassets */,
+				B4DB3474270142DAB7E08DF5 /* Info.plist */,
+			);
+			path = CalendarioPerpetuoFlip;
+			sourceTree = "<group>";
+		};
+		48C49F3FA53A446796B570DF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				26289B8B46AA4A3585B2E08A /* CalendarioDatos.swift */,
+				03BCC79990E34978906717DC /* EstadoFlip.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		44EDF668D3BA49D59F63D653 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5DFB0677C79E4D2B9F534831 /* CalendarioViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		2AF402F6D7BB4E3FB905A8CC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				82CFC9FE14F94C82A903EECA /* ContentView.swift */,
+				97C5E8901FF047B5B8BEC66C /* FlipCharacterView.swift */,
+				5F3963D18B4243F1A654032C /* FlipGroupView.swift */,
+				28E9F4048DBD4D14839F5D6A /* AnalogClockView.swift */,
+				77B5141A05BC4D78B4AB0884 /* WoodenFrame.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2B54A538D5594A71811894DE /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				6FD8C3640FE44851BFD63200 /* FlipSoundPlayer.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		F719D0C59F2C4475A14E75F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A9D841713C294124A7B01C9D /* CalendarioPerpetuoFlip.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BEF6CBAFCFAE4DF9BF4084E5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A830917632BF4CF189E125E5 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2FE17FCBE279437984620CF2 /* CalendarioPerpetuoFlip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2047963F351442D8FC0AF83 /* Build configuration list for PBXNativeTarget "CalendarioPerpetuoFlip" */;
+			buildPhases = (
+				653688F4368240E798C8512A /* Sources */,
+				819CA3B759EE48CE85687F0C /* Frameworks */,
+				71FBB52150144B87A2DA4948 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CalendarioPerpetuoFlip;
+			productName = CalendarioPerpetuoFlip;
+			productReference = A9D841713C294124A7B01C9D /* CalendarioPerpetuoFlip.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E31714FDBEB043C9A70DCA87 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					2FE17FCBE279437984620CF2 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = EE8509AA2D9C425791139AA8 /* Build configuration list for PBXProject "CalendarioPerpetuoFlip" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = es;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				es,
+				Base,
+			);
+			mainGroup = 84DE979174C046D8A1DD83D5;
+			productRefGroup = F719D0C59F2C4475A14E75F9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2FE17FCBE279437984620CF2 /* CalendarioPerpetuoFlip */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		71FBB52150144B87A2DA4948 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0FD4679107346EF8710DF7D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		653688F4368240E798C8512A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				083927229ED54666B589C96E /* CalendarioPerpetuoFlipApp.swift in Sources */,
+				E5BC53BE11234F5084B1B6E5 /* CalendarioDatos.swift in Sources */,
+				45908A8EE2204B23B490CD4B /* EstadoFlip.swift in Sources */,
+				74FB9045C25E49BC8DDD48EB /* CalendarioViewModel.swift in Sources */,
+				F9D9C40AD90D4B9FAD28BAED /* ContentView.swift in Sources */,
+				3F7C0223CADE4938A4E07A18 /* FlipCharacterView.swift in Sources */,
+				3747E75C4CCB43D5A86FE656 /* FlipGroupView.swift in Sources */,
+				06BF5490AABC42C7967B8D8C /* AnalogClockView.swift in Sources */,
+				CCFDEC0753034C3089ED8507 /* WoodenFrame.swift in Sources */,
+				ABA9E918CCFD437E9B57E301 /* FlipSoundPlayer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		221640B87F54486EAD99909D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FF37247ABA6B452994CB606A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1EE54EFA218848E3BD4E6CAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CalendarioPerpetuoFlip/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.victornaranjo.calendarioperpetuoflip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		FFF5284273304D71A9DF124B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CalendarioPerpetuoFlip/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.victornaranjo.calendarioperpetuoflip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EE8509AA2D9C425791139AA8 /* Build configuration list for PBXProject "CalendarioPerpetuoFlip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				221640B87F54486EAD99909D /* Debug */,
+				FF37247ABA6B452994CB606A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E2047963F351442D8FC0AF83 /* Build configuration list for PBXNativeTarget "CalendarioPerpetuoFlip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EE54EFA218848E3BD4E6CAF /* Debug */,
+				FFF5284273304D71A9DF124B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E31714FDBEB043C9A70DCA87 /* Project object */;
+}
