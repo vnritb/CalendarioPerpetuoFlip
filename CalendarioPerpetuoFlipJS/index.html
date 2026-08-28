@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<title>Calendario perpetuo flip</title>
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+<div id="app">
+    <canvas id="madera"></canvas>
+
+    <div id="contenido">
+        <div class="columna columna-izquierda">
+            <div class="ventana ventana-reloj">
+                <div class="ventana-marco">
+                    <div class="ventana-contenido" id="mount-reloj"></div>
+                    <span class="tornillo tornillo-tl"></span>
+                    <span class="tornillo tornillo-tr"></span>
+                    <span class="tornillo tornillo-bl"></span>
+                    <span class="tornillo tornillo-br"></span>
+                </div>
+            </div>
+            <div class="ventana ventana-dia-mes">
+                <div class="ventana-marco">
+                    <div class="ventana-contenido" id="mount-dia-mes"></div>
+                    <span class="tornillo tornillo-tl"></span>
+                    <span class="tornillo tornillo-tr"></span>
+                    <span class="tornillo tornillo-bl"></span>
+                    <span class="tornillo tornillo-br"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="columna columna-derecha">
+            <div class="ventana ventana-dia-semana">
+                <div class="ventana-marco">
+                    <div class="ventana-contenido" id="mount-dia-semana"></div>
+                    <span class="tornillo tornillo-tl"></span>
+                    <span class="tornillo tornillo-tr"></span>
+                    <span class="tornillo tornillo-bl"></span>
+                    <span class="tornillo tornillo-br"></span>
+                </div>
+            </div>
+            <div class="ventana ventana-mes">
+                <div class="ventana-marco">
+                    <div class="ventana-contenido" id="mount-mes"></div>
+                    <span class="tornillo tornillo-tl"></span>
+                    <span class="tornillo tornillo-tr"></span>
+                    <span class="tornillo tornillo-bl"></span>
+                    <span class="tornillo tornillo-br"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="aviso-orientacion">
+        <p>Gira el iPad a horizontal para ver el calendario</p>
+    </div>
+</div>
+
+<script src="js/datos.js"></script>
+<script src="js/estadoFlip.js"></script>
+<script src="js/sonido.js"></script>
+<script src="js/maderaTextura.js"></script>
+<script src="js/flipCharacter.js"></script>
+<script src="js/flipGroup.js"></script>
+<script src="js/reloj.js"></script>
+<script src="js/viewModel.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

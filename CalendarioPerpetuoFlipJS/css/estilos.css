@@ -1,0 +1,243 @@
+/*
+  estilos.css
+  Calendario Perpetuo Flip - version JavaScript
+  Compatible con Safari de iOS 9.3.5: sin CSS Grid, sin "gap" en flexbox,
+  sin variables CSS, todo con prefijos -webkit- donde hace falta.
+*/
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #1a0f08;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+#app {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+#madera {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#contenido {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+.columna {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+}
+
+.columna-izquierda {
+    -webkit-flex: 2;
+    flex: 2;
+    margin-right: 16px;
+}
+
+.columna-derecha {
+    -webkit-flex: 3;
+    flex: 3;
+}
+
+.ventana {
+    -webkit-flex: 1;
+    flex: 1;
+    position: relative;
+}
+
+.ventana-reloj,
+.ventana-dia-semana {
+    margin-bottom: 16px;
+}
+
+.ventana-marco {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    background-color: #0a0a0a;
+    background-image: -webkit-linear-gradient(top, #141414, #050505);
+    background-image: linear-gradient(to bottom, #141414, #050505);
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.ventana-contenido {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
+}
+
+.tornillo {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #8a8a8a;
+    background-image: -webkit-radial-gradient(30% 30%, circle, #bfbfbf, #404040);
+    background-image: radial-gradient(circle at 30% 30%, #bfbfbf, #404040);
+}
+
+.tornillo-tl { top: 8px; left: 8px; }
+.tornillo-tr { top: 8px; right: 8px; }
+.tornillo-bl { bottom: 8px; left: 8px; }
+.tornillo-br { bottom: 8px; right: 8px; }
+
+/* --- Grupo de laminas flip --- */
+
+.flip-grupo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.flip-celda {
+    position: relative;
+    height: 100%;
+    -webkit-perspective: 600px;
+    perspective: 600px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.flip-panel {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    background: #000000;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-panel .flip-texto {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    -webkit-transition: color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
+}
+
+.flip-bisagra {
+    position: absolute;
+    background-color: #737373;
+}
+
+.flip-marco {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1.5px solid rgba(38, 38, 38, 0.9);
+    pointer-events: none;
+}
+
+/* --- Reloj analogico --- */
+
+.reloj-analogico {
+    position: relative;
+}
+
+.reloj-marca {
+    position: absolute;
+}
+
+.reloj-numero {
+    position: absolute;
+    color: #000000;
+    font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    text-align: center;
+}
+
+.reloj-aguja-cont {
+    position: absolute;
+}
+
+.reloj-aguja {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+}
+
+.reloj-centro {
+    position: absolute;
+    background-color: #000000;
+    border-radius: 50%;
+}
+
+/* --- Aviso de orientacion (solo en vertical) --- */
+
+#aviso-orientacion {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000000;
+    color: #ffffff;
+    z-index: 999;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    text-align: center;
+    font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    padding: 40px;
+}
+
+@media (orientation: portrait) {
+    #aviso-orientacion {
+        display: -webkit-flex;
+        display: flex;
+    }
+}
