@@ -19,6 +19,35 @@
         }
     }
 
+    // Aviso de errores en pantalla: en un iPad viejo no siempre es facil
+    // conectar el inspector remoto de Safari. Si algo falla en JS, se ve
+    // una franja roja abajo del todo con el mensaje, para poder hacer una
+    // captura y saber exactamente que ha pasado.
+    function mostrarErrorEnPantalla(msg) {
+        var el = document.getElementById('debug-error');
+        if (!el) {
+            el = document.createElement('div');
+            el.id = 'debug-error';
+            el.style.position = 'fixed';
+            el.style.left = '0';
+            el.style.right = '0';
+            el.style.bottom = '0';
+            el.style.zIndex = '9999';
+            el.style.background = 'rgba(190,20,20,0.92)';
+            el.style.color = '#ffffff';
+            el.style.fontFamily = 'Courier, monospace';
+            el.style.fontSize = '11px';
+            el.style.padding = '5px 8px';
+            document.body.appendChild(el);
+        }
+        el.textContent = msg;
+    }
+
+    window.addEventListener('error', function (e) {
+        var msg = 'JS error: ' + e.message + ' (' + e.filename + ':' + e.lineno + ')';
+        mostrarErrorEnPantalla(msg);
+    }, false);
+
     function construirDOM() {
         mountReloj = document.getElementById('mount-reloj');
         mountDiaSemana = document.getElementById('mount-dia-semana');

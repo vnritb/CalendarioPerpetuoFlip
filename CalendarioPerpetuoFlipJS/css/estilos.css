@@ -153,6 +153,8 @@ html, body {
     height: 100%;
     -webkit-perspective: 600px;
     perspective: 600px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
     margin-left: 3px;
     margin-right: 3px;
 }
