@@ -1,0 +1,51 @@
+name: Desplegar Calendario Perpetuo (JS) en GitHub Pages
+
+# Publica el contenido de CalendarioPerpetuoFlipJS/ (la version HTML/CSS/JS,
+# pensada para Safari de iOS 9.3.5) en GitHub Pages, usando el flujo
+# oficial de Actions (sin rama gh-pages ni ficheros intermedios).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'CalendarioPerpetuoFlipJS/**'
+      - '.github/workflows/deploy-pages.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Desactivar procesado Jekyll
+        run: touch CalendarioPerpetuoFlipJS/.nojekyll
+
+      - name: Subir CalendarioPerpetuoFlipJS/ como artefacto de Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'CalendarioPerpetuoFlipJS'
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Desplegar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
