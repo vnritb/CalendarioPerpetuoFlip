@@ -111,7 +111,7 @@ CalendarioPerpetuoFlip/
   el carácter nuevo gira desde arriba (90° → 0°) hasta asentarse. Esto
   reproduce el mecanismo real de un panel tipo aeropuerto.
 - **Sonido**: `FlipSoundPlayer` genera con `AVAudioEngine` un buffer de
-  audio en memoria (ruido modulado para el "rrrrr" del trinquete, más un
+  audio en memoria (ruido modulado para el "rrrrrr" del trinquete, más un
   impulso corto para el "clk!" final), sin usar ningún archivo de audio.
   Suena una vez por cada lámina que gira.
 - **Textura de madera**: `WoodTexture` dibuja un degradado marrón más
