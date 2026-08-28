@@ -103,6 +103,21 @@ sin barra de Safari, gracias a las meta `apple-mobile-web-app-*` del
   refrescar en segundo plano: la verificación de fecha se apoya en los
   eventos `visibilitychange`/`pageshow` del navegador.
 
+## Tipografía de las láminas
+
+Las láminas usan **IBM Plex Mono Bold**: monoespaciada, de trazo recto
+y sin serifas, muy cercana a la de los paneles tipo "Solari" de
+aeropuerto/estación (más recta que `Courier New`, que tiene un aire de
+máquina de escribir). Se sirve en local, sin depender de ningún CDN:
+
+- `fonts/IBMPlexMono-Bold.woff` (formato principal)
+- `fonts/IBMPlexMono-Bold.ttf` (respaldo; WOFF2 no lo soporta Safari
+  hasta iOS 12, así que aquí se usa WOFF1/TTF)
+- `fonts/OFL.txt` — licencia SIL Open Font License 1.1 de IBM Plex
+
+Si no carga (por ejemplo si borras la carpeta `fonts/`), `css/estilos.css`
+cae automáticamente a `'Courier New', Courier, monospace`.
+
 ## Ajustes que quizá quieras cambiar
 
 - **Umbral de swipe** (`PUNTOS_POR_DIA`) y **segundos en rojo**
@@ -110,3 +125,5 @@ sin barra de Safari, gracias a las meta `apple-mobile-web-app-*` del
 - **Duración de cada fase del flip** (`DURACION_FASE`): en
   `js/flipCharacter.js`.
 - **Colores de fase** (blanco/ámbar/rojo): en `js/estadoFlip.js`.
+- **Fuente de las láminas**: cambia la regla `@font-face` y el
+  `font-family` de `.flip-panel .flip-texto` en `css/estilos.css`.

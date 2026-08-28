@@ -5,6 +5,19 @@
   sin variables CSS, todo con prefijos -webkit- donde hace falta.
 */
 
+/* Tipografia de las laminas flip: IBM Plex Mono Bold, monoespaciada y de
+   trazo recto/geometrico (sin serifas), muy cercana a la de los paneles
+   tipo "Solari" de aeropuerto/estacion. Se sirve en local (WOFF, con TTF
+   de respaldo) para que funcione sin red y en el WebKit de iOS 9.3.5,
+   que no soporta WOFF2. */
+@font-face {
+    font-family: 'FlipFont';
+    src: url('../fonts/IBMPlexMono-Bold.woff') format('woff'),
+         url('../fonts/IBMPlexMono-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
 * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -159,7 +172,7 @@ html, body {
     left: 0;
     width: 100%;
     text-align: center;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'FlipFont', 'Courier New', Courier, monospace;
     font-weight: bold;
     -webkit-font-smoothing: antialiased;
     -webkit-transition: color 0.3s ease-in-out;
