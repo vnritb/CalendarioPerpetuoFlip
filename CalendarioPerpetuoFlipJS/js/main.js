@@ -11,6 +11,12 @@
     var grupoDiaSemana, grupoDiaMes, grupoMes, reloj;
     var mountReloj, mountDiaSemana, mountDiaMes, mountMes, canvasMadera;
     var elVentanaReloj, elVentanaDiaMes, elVentanaDiaSemana, elVentanaMes;
+    var elEspaciadorScroll;
+
+    // Alto extra (px) del hueco vacio al final de la pagina, de mas
+    // sobre lo que mide la pantalla, solo para poder hacer scroll y que
+    // Safari de iOS oculte su barra de herramientas.
+    var ALTO_EXTRA_ESPACIADOR = 100;
 
     // Mismas proporciones que ContentView.swift (proporcionIzquierda/
     // proporcionDerecha/espaciado/margenExterior), pero calculadas aqui a
@@ -19,6 +25,33 @@
     var ESPACIADO_LAYOUT = 16;
     var PROPORCION_IZQUIERDA = 2;
     var PROPORCION_DERECHA = 3;
+
+    // OJO con esto: Chrome/Chromium (y todo lo que se basa en el, Edge,
+    // Opera, Brave...) siempre lleva en su user-agent el texto fijo
+    // "AppleWebKit/537.36" y tambien "Safari/537.36" de compatibilidad,
+    // AUNQUE su motor real (Blink) sea mucho mas nuevo. Comparar ese
+    // numero a pelo clasificaria erroneamente a Chrome como "WebKit
+    // viejo" (537.36 < 601.1). Por eso primero hay que descartar toda la
+    // familia Chromium, y solo entonces mirar el numero de AppleWebKit
+    // -- ahi si es fiable, porque en el Safari real ese numero SI sube
+    // con cada version.
+    function esNavegadorSafariReal() {
+        var ua = navigator.userAgent;
+        if (!/Safari\//.test(ua)) { return false; }
+        return !/Chrome|Chromium|CriOS|FxiOS|EdgiOS|EdgA|Edg\/|OPiOS|OPR\//.test(ua);
+    }
+
+    function obtenerVersionWebkit() {
+        var m = navigator.userAgent.match(/AppleWebKit\/(\d+(?:\.\d+)?)/);
+        if (!m) { return null; }
+        return parseFloat(m[1]);
+    }
+
+    var VERSION_WEBKIT = obtenerVersionWebkit();
+    // Solo se desactiva el swipe en Safari REAL con motor <= 601.1 (iOS
+    // 9.3.5 y anteriores). Cualquier otro navegador (Chrome, Firefox,
+    // Safari mas moderno...) conserva el swipe.
+    var SWIPE_DESHABILITADO = esNavegadorSafariReal() && VERSION_WEBKIT !== null && VERSION_WEBKIT <= 601.1;
 
     function alListo(fn) {
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
@@ -58,6 +91,7 @@
     }, false);
 
     function construirDOM() {
+        elEspaciadorScroll = document.getElementById('espaciador-scroll');
         elVentanaReloj = document.getElementById('ventana-reloj');
         elVentanaDiaMes = document.getElementById('ventana-dia-mes');
         elVentanaDiaSemana = document.getElementById('ventana-dia-semana');
@@ -113,6 +147,27 @@
         el.style.height = alto + 'px';
     }
 
+    // El hueco vacio tiene que medir siempre "pantalla completa + un
+    // poco", para que SIEMPRE haya de donde hacer scroll (si no, en
+    // orientaciones/tamanos donde ya no sobrase espacio, dejaria de
+    // poder ocultarse la barra). Se recalcula cada vez que cambia el
+    // tamano de la ventana.
+    function ajustarEspaciadorScroll() {
+        if (!elEspaciadorScroll) { return; }
+        elEspaciadorScroll.style.height = (window.innerHeight + ALTO_EXTRA_ESPACIADOR) + 'px';
+    }
+
+    // El truco clasico para que Safari de iOS oculte su barra de
+    // herramientas: la pagina tiene que ser mas alta que la pantalla
+    // (ver #espaciador-scroll) y basta con desplazar el scroll 1px. Como
+    // #app es position:fixed, el calendario en si no se mueve ni un
+    // pixel; lo unico que cambia es que, una vez oculta la barra,
+    // window.innerHeight crece y el "resize" que dispara Safari hace que
+    // medirYAjustar() reparta ese espacio de mas.
+    function ocultarBarraDelNavegador() {
+        window.scrollTo(0, 1);
+    }
+
     function medirYAjustar() {
         // Reajustar el <canvas> de madera a la resolucion real de pantalla.
         var ancho = window.innerWidth;
@@ -122,6 +177,8 @@
             canvasMadera.height = alto;
         }
         Madera.dibujar(canvasMadera);
+
+        ajustarEspaciadorScroll();
 
         // 1) Posicionar las 4 ventanas (sin flexbox, ver arriba).
         ajustarLayoutPrincipal();
@@ -134,41 +191,11 @@
 
         var rectReloj = mountReloj.getBoundingClientRect();
         reloj.setSize(rectReloj.width, rectReloj.height);
-
-        actualizarDiagnostico();
     }
 
     function ajustarGrupo(grupo, contenedor) {
         var rect = contenedor.getBoundingClientRect();
         grupo.setSize(rect.width, rect.height);
-    }
-
-    // Linea de diagnostico en la esquina: tamanos realmente medidos, para
-    // poder hacer una captura y saber si el layout se esta calculando bien
-    // en el dispositivo real, sin depurar por cable. Quitar cuando ya no
-    // haga falta.
-    function actualizarDiagnostico() {
-        var el = document.getElementById('debug-info');
-        if (!el) {
-            el = document.createElement('div');
-            el.id = 'debug-info';
-            el.style.position = 'fixed';
-            el.style.left = '4px';
-            el.style.top = '2px';
-            el.style.zIndex = '9998';
-            el.style.color = 'rgba(255,255,255,0.55)';
-            el.style.fontFamily = 'Courier, monospace';
-            el.style.fontSize = '9px';
-            document.body.appendChild(el);
-        }
-        var rDS = mountDiaSemana.getBoundingClientRect();
-        var rDM = mountDiaMes.getBoundingClientRect();
-        var rR = mountReloj.getBoundingClientRect();
-        el.textContent =
-            'vp ' + window.innerWidth + 'x' + window.innerHeight +
-            ' | diaSemana ' + Math.round(rDS.width) + 'x' + Math.round(rDS.height) +
-            ' | diaMes ' + Math.round(rDM.width) + 'x' + Math.round(rDM.height) +
-            ' | reloj ' + Math.round(rR.width) + 'x' + Math.round(rR.height);
     }
 
     var coloresPorFase = {
@@ -198,17 +225,39 @@
 
     function conectarSwipe() {
         var app = document.getElementById('app');
-        var arrastrandoDedo = false;
-        var yInicial = 0;
         var sonidoDesbloqueado = false;
 
-        function inicio(y) {
-            arrastrandoDedo = true;
-            yInicial = y;
+        function desbloquearSonido() {
             if (!sonidoDesbloqueado) {
                 Sonido.desbloquear();
                 sonidoDesbloqueado = true;
             }
+        }
+
+        if (SWIPE_DESHABILITADO) {
+            // Motores AppleWebKit <= 601.1 (Safari de iOS 9.3.5 y
+            // anteriores): sin gesto de swipe manual. Solo queda un
+            // touchstart minimo para desbloquear el audio, y un
+            // touchmove que traga el evento para que el dedo no arrastre
+            // la pagina (recordar: la pagina es mas alta que la pantalla
+            // a proposito, para ocultar la barra de Safari).
+            app.addEventListener('touchstart', function (e) {
+                if (e.touches.length !== 1) { return; }
+                desbloquearSonido();
+            }, false);
+            app.addEventListener('touchmove', function (e) {
+                if (e.cancelable) { e.preventDefault(); }
+            }, false);
+            return;
+        }
+
+        var arrastrandoDedo = false;
+        var yInicial = 0;
+
+        function inicio(y) {
+            arrastrandoDedo = true;
+            yInicial = y;
+            desbloquearSonido();
         }
 
         function mover(y) {
@@ -262,7 +311,22 @@
         }
         window.addEventListener('resize', programar, false);
         window.addEventListener('orientationchange', function () {
-            setTimeout(medirYAjustar, 300);
+            // Tras girar el iPad, Safari puede volver a mostrar su barra:
+            // se recalcula el layout y se intenta ocultar otra vez.
+            setTimeout(function () {
+                medirYAjustar();
+                ocultarBarraDelNavegador();
+            }, 300);
+        }, false);
+
+        // Al volver de segundo plano tambien puede reaparecer la barra.
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) {
+                setTimeout(ocultarBarraDelNavegador, 200);
+            }
+        }, false);
+        window.addEventListener('pageshow', function () {
+            setTimeout(ocultarBarraDelNavegador, 200);
         }, false);
     }
 
@@ -273,7 +337,19 @@
         conectarRedimension();
         medirYAjustar();
         ViewModel.iniciar();
+
+        // Primer intento nada mas arrancar...
+        ocultarBarraDelNavegador();
     }
+
+    // ...y otro tras "load" (con la pagina ya completamente pintada, que
+    // es cuando este truco funciona de forma mas fiable en Safari viejo),
+    // mas un tercer intento de repuesto un poco despues por si el primero
+    // llega demasiado pronto.
+    window.addEventListener('load', function () {
+        ocultarBarraDelNavegador();
+        setTimeout(ocultarBarraDelNavegador, 300);
+    }, false);
 
     alListo(iniciarApp);
 })();
